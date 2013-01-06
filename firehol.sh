@@ -2438,17 +2438,20 @@ blacklist() {
 		# Blacklist INPUT unidirectional
 		iptables -t filter -N BL_IN_UNI	# INPUT
 		iptables -A BL_IN_UNI -m state --state NEW -j DROP
+		iptables -A BL_IN_UNI -j DROP
 		
 		# No need for OUTPUT/FORWARD unidirectional
 		
 		# Blacklist INPUT bidirectional
 		iptables -t filter -N BL_IN_BI	# INPUT
+		iptables -A BL_IN_BI -m state --state NEW -j DROP
 		iptables -A BL_IN_BI -j DROP
 		
 		# Blacklist OUTPUT/FORWARD bidirectional
 		iptables -t filter -N BL_OUT_BI	# OUTPUT and FORWARD
-		iptables -A BL_OUT_BI -p tcp -j REJECT --reject-with tcp-reset
-		iptables -A BL_OUT_BI -j REJECT --reject-with icmp-host-unreachable
+		iptables -A BL_OUT_BI -m state --state NEW -p tcp -j REJECT #--reject-with tcp-reset
+		iptables -A BL_OUT_BI -m state --state NEW -j REJECT --reject-with icmp-host-unreachable
+		iptables -A BL_OUT_BI -j REJECT
 		
 		blacklist_chain=1
 	fi
