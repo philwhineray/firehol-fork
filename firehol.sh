@@ -544,8 +544,9 @@ load_ips() {
 # Optimized (CIDR) by Marc 'HE' Brockschmidt <marc@marcbrockschmidt.de>
 # Further optimized and reduced by http://www.vergenet.net/linux/aggregate/
 # The supplied get-iana.sh uses 'aggregate-flim' if it finds it in the path.
-RESERVED_IPS="0.0.0.0/8 5.0.0.0/8 10.0.0.0/8 23.0.0.0/8 36.0.0.0/7 39.0.0.0/8 42.0.0.0/8 100.0.0.0/8 102.0.0.0/7 104.0.0.0/7 106.0.0.0/8 127.0.0.0/8 179.0.0.0/8 185.0.0.0/8 240.0.0.0/4 "
-load_ips RESERVED_IPS "${RESERVED_IPS}" 90 "Run the supplied get-iana.sh script to generate this file." require-file
+RESERVED_IPS="0.0.0.0/8 10.0.0.0/8 127.0.0.0/8 240.0.0.0/4 "
+#load_ips RESERVED_IPS "${RESERVED_IPS}" 90 "Run the supplied get-iana.sh script to generate this file." require-file
+load_ips RESERVED_IPS "${RESERVED_IPS}" 0
 
 # Private IPv4 address space
 # Suggested by Fco.Felix Belmonte <ffelix@gescosoft.com>
